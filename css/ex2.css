@@ -3,7 +3,7 @@ body{
     padding: 0;
     margin: 0;
     font-size: 1.2rem;
-   font-family: "Instrument Serif", serif;
+    font-family: "Instrument Serif", serif;
 }
 
 a{
@@ -25,37 +25,65 @@ header{
     z-index: 200000;
 }
 
-/*menu*/
+/* NAV 後方的細長半透明條與變色效果 */
+.nav-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.65); /* 預設半透明白 */
+    backdrop-filter: blur(5px);
+    z-index: -1;
+    transition: background 0.4s ease;
+}
+
+/* 當滑鼠移到 header 範圍內時變色 */
+header:hover .nav-bg {
+    background: rgba(20, 30, 48, 0.85); /* 半透明深藍灰色 */
+}
+
+header:hover nav a {
+    color: rgb(255, 255, 255);
+}
+
+/*menu: 改為 Flex 排版讓 Logo 與 NAV 垂直完美置中 */
 .menu{
     width: 80%;
     margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0; /* 控制長條整體上下留白，讓長條保持細長 */
 }
 
-/*logo*/
+/*logo 小一點*/
 .logo{
-    float: left;
-    width: 120px;
-    background: rgba(255, 255, 255, 1);
+    width: 80px; /* Logo 縮小至 80px */
+    background: transparent; /* 去除原本白框底色，符合純透明/半透明感 */
 }
 
 .logo img{
     width: 100%;
     display: block;
-    margin: auto;
+    margin: 0;
 }
 
 /*nav*/
 nav{
-    float: right;
+    display: flex;
+    align-items: center;
 }
 
 nav a{
-    padding: 50px;
+    padding: 10px 25px; /* 調小內襯邊距，讓長條變細 */
     font-weight: bold;
+    transition: color 0.3s;
 }
 
 nav a:hover{
     text-decoration: underline;
+    color: rgba(0, 255, 157, 0.8);
 }
 
 /*hero*/
@@ -101,104 +129,100 @@ section h1{
 
 /*card*/
 .card{
-	display:inline-block;
-	width:24.5%;
-	box-sizing:border-box;
-	padding:10px;
-	text-align:center;
-	cursor:pointer;
+    display:inline-block;
+    width:24.5%;
+    box-sizing:border-box;
+    padding:10px;
+    text-align:center;
+    cursor:pointer;
 }
 
 .card img{
-	width:80%;
-	border-radius:50%;
-	border:solid 1px rgba(69, 9, 32, .2);
-    -ms-transform: rotate(0deg); /* IE 9 */
-    -webkit-transform: rotate(0deg); /* Safari */
-    transform: rotate(0deg); /* Standard syntax */
-	
-	transition: transform 1.5s;
-	-webkit-transition: transform 1.5s;
+    width:80%;
+    border-radius:50%;
+    border:solid 1px rgba(69, 9, 32, .2);
+    transform: rotate(0deg);
+    transition: transform 1.5s;
+    -webkit-transition: transform 1.5s;
 }
 
 .card:hover img{
-	-ms-transform: rotate(-20deg); /* IE 9 */
-    -webkit-transform: rotate(-20deg); /* Safari */
-    transform: rotate(-20deg); /* Standard syntax */
+    transform: rotate(-20deg);
 }
 
 /*article*/
 article{
-	width:100%;
+    width:100%;
     height: 500px;
-	margin:auto;
+    margin:auto;
     margin-bottom: 30px;
     overflow: hidden;
 }
 
 article:hover{
-	cursor:pointer;	
+    cursor:pointer; 
 }
 
 .a_left{
     position: relative;
-	float:left;
-	width:50%;
+    float:left;
+    width:50%;
     height:100%;
+    overflow: hidden;
+    border-radius: 20px;
 }
 
 .a_left img{
-	float:left;
-	width:100%;
+    float:left;
+    width:100%;
     height:100%;
-	object-fit:cover;
+    object-fit:cover;
+    border-radius: 20px;
+    transition: transform 0.6s ease;
+}
+
+article:hover .a_left img {
+    transform: scale(1.08);
 }
 
 .a_right{
-	float:left;
-	width:50%;
+    float:left;
+    width:50%;
     height:100%;
-	padding: 4%;
-	box-sizing:border-box;
-	background:rgba(255, 255, 255, 1);
-	color:rgb(17, 0, 255);
-	text-align:left;
+    padding: 4%;
+    box-sizing:border-box;
+    background:rgba(255, 255, 255, 1);
+    color:rgb(17, 0, 255);
+    text-align:left;
     line-height: 2rem;
 
     transition: color 0.5s, background 0.5s;
-	-webkit-transition: color 0.5s, background 0.5s; /*前綴詞*/
-	
-	transition-timing-function:linear;
-	-webkit-transition-timing-function: linear;/* Safari */
-
+    transition-timing-function:linear;
 }
 
 article:hover .a_right{
-	background:rgb(171, 226, 236);
+    background:rgb(171, 226, 236);
     color:rgb(241, 236, 236);
 }
 
 .moreb{
-	position:absolute;
-	top:50%;
-	left:50%;
-	transform: translate(-50%, -50%);
-	
-	background:rgb(6, 250, 250);
-	padding:30px;
-	color: rgba(255, 255, 255, 1);
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    
+    background:rgb(6, 250, 250);
+    padding:20px 35px;
+    color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
 
     opacity:0;
-	transition: opacity 1s;
-	-webkit-transition: opacity 1s;/*前綴詞*/
-	
-	transition-timing-function: ease-in-out;
-	-webkit-transition-timing-function: ease-in-out;/* Safari */
-
+    transition: opacity 1s, transform 0.3s;
+    transition-timing-function: ease-in-out;
 }
 
 article:hover .moreb{
-	opacity:1;
+    opacity:1;
 }
 
 /*footer*/
